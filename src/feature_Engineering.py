@@ -8,7 +8,6 @@ df=pd.read_csv(url)
 # print(df.head())
 # print(df.columns)
 def featureEng(df):
-    df.drop(df.columns[0:2],axis=1,inplace=True)
     df['Income_Loan_Ratio'] = df['Income'] / df['LoanAmount']
     df["Employment_Stability"] = df["MonthsEmployed"] / 12
     df["High_DTI_Flag"] = (df["DTIRatio"] > 0.4).astype(int)

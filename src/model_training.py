@@ -43,16 +43,19 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train_processed, y_t
 
 print(f"Checking the class distribution for the data : {y_train_resampled.value_counts()}\n")
 
-
+neg=(y_train==0).sum()
+pos=(y_train==1).sum()
 # Defining the models in the 
 models = {
     "Logistic Regression": LogisticRegression(max_iter=1000),  # base line model for classification algorithm
-    "Random Forest": RandomForestClassifier(random_state=42),  #Random forest learn complex patterns easily  
+    "Random Forest": RandomForestClassifier(
+        class_weight='balanced',
+        random_state=42),  #Random forest learn complex patterns easily  
     "XGBoost": XGBClassifier(      #XGBClassifier learns from complex patterns and build trees sequentially 
         eval_metric="logloss", 
         random_state=42, 
         # device="cuda" # Keeping this to gpu
-        scale_pos_weight=10, # Forces XGBoost to treat 1 default as important as 10 safe loans
+        scale_pos_weight=neg/pos, # Forces XGBoost to treat 1 default as important as 10 safe loans
         max_depth=4
     )
 }

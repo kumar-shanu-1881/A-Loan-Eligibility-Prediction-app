@@ -65,9 +65,9 @@ Loan-Eligibility-Prediction/
 │
 ├── EDA/
 │   ├── eda.ipynb
-│   ├── Feature_Engineering.py
 │
 ├── src/
+│   ├── Feature_Engineering.py
 │   ├── data_preprocessing.py
 │   ├── model_training.py
 │   ├── model_evaluation.py
