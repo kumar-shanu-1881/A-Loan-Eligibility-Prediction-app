@@ -27,7 +27,7 @@ def preprocessing(X):
         ]
     )
 
-    X_processed = preprocessor.fit_transform(X)
+    # X_processed = preprocessor.fit_transform(X)
     
     return preprocessor
 
