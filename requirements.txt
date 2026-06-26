@@ -1,0 +1,19 @@
+# Data Manipulation & Math
+pandas==2.2.0
+numpy==1.26.4
+scipy==1.12.0
+
+# Machine Learning & Optimization
+scikit-learn==1.4.0
+xgboost==2.0.3
+imbalanced-learn==0.12.0
+
+# Frontend Deployment UI
+streamlit==1.31.1
+
+# Backend Deployment API
+Flask==3.0.2
+
+# Serialization & Communication
+joblib==1.3.2
+requests==2.31.0

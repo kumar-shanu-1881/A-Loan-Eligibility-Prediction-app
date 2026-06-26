@@ -1,5 +1,15 @@
 import streamlit as st
 
+st.markdown("""
+    <style>
+        /* Hide the Deploy button completely */
+        .stAppDeployButton {
+            display: none !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+
 # Page Configuration
 st.set_page_config(page_title="Loan Risk Portal", page_icon="🏦", layout="centered")
 
