@@ -27,10 +27,7 @@ def featureEng(df):
     df["log_income"] = np.log1p(df["Income"])
 
     df.drop(columns=[
-        "Income",
-        "LoanAmount",
-        "MonthsEmployed",
-        "CreditScore"
+        "MonthsEmployed"
     ], inplace=True)
 
     return df
