@@ -17,6 +17,7 @@ df=pd.read_csv(r'C:\Users\bnsah\OneDrive\文档\PROJECTS(FINAL)\PROJECTS\Loan El
 # Adding features in data frame using feature engineering 
 df=featureEng(df)
 
+print(df.columns)
 # seaprating the data from df 
 X=df.drop(columns=["Default"])
 y=df['Default']
