@@ -2,4 +2,4 @@
 __pycache__/
 *.xlsx
 *.json
-data/raw/
+data\Loan_default.csv
