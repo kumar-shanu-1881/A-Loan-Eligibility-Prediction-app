@@ -2,9 +2,6 @@ import streamlit as st
 import requests
 
 
-# Page Config 
-st.set_page_config(page_title="Loan Default Predictor", page_icon="🏦", layout="centered")
-
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
 st.markdown("---")
