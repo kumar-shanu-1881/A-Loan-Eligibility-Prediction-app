@@ -30,6 +30,10 @@ def featureEng(df):
         "MonthsEmployed"
     ], inplace=True)
 
+    if "Unnamed: 0" in df.columns:
+        df.drop(columns=["Unnamed: 0"], inplace=True)
+    print(df.columns)
+
     return df
 
 if __name__=="__main__":
