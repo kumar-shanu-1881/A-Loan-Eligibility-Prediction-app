@@ -2,11 +2,6 @@ import streamlit as st
 import pandas as pd
 
 # Page Configuration
-st.set_page_config(
-    page_title="Tech Stack & Architecture",
-    page_icon="🛠️",
-    layout="wide"
-)
 
 st.title("🛠️ Technology Stack & System Architecture")
 st.markdown("---")
