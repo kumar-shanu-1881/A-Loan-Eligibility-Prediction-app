@@ -1,71 +1,304 @@
-# 🏦 Smart Loan Risk Evaluator (Microservices Architecture)
+# 🏦 Loan Eligibility Prediction System
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-API-lightgrey.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-UI-FF4B4B.svg)
-![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-F7931E.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B.svg)
+![Flask](https://img.shields.io/badge/Flask-API-black.svg)
+![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-A full-stack machine learning platform that assesses risk and predicts the likelihood of loan default in real time. The system was developed using a robust microservice architecture, with a front-end UI and a back-end machine learning inference engine.
+A machine learning–powered web application that predicts **loan eligibility and default risk** using customer financial and demographic information. The project follows a **microservices architecture**, where a **Streamlit frontend** communicates with a **Flask backend API** hosting a trained machine learning pipeline.
 
-## 🚀 Business Value & ML Performance
+---
 
-In financial data sets, class imbalance significantly impacts model accuracy. In this project, balanced recall and interpretability were valued more than raw, deceptive accuracy.
+# 📌 Project Overview
 
-* **Final Model:** Logistic Regression (Tuned via RandomizedSearchCV)
-* **Optimization Methodology:** Utilized `L1 (Lasso) Regularization` in order to mathematically remove noisy features, creating an interpretable model ready to go into banking.
-* **Feature Engineering:** Created custom financial indicators such as `Income_Loan_Ratio`, `High_DTI_Flag`, and `Employment_Stability`.
-* **Performance Metrics:**
-  * **ROC-AUC Score:** `0.75`
-  * **Class 1 (Default) Recall:** `69%` (Ability to catch the bad loans)
-  * **Class 0 (Safe) Recall:** `68%` (Ability to approve profitable customers)
+Financial institutions need to evaluate loan applicants accurately while minimizing the risk of defaults. This project automates that process by analyzing applicant details and predicting whether an applicant is likely to default on a loan.
 
-## 🏗️ System Architecture
+The application combines:
 
-This system operates using a two-server microservice architecture.
+- 🧠 Machine Learning
+- ⚙️ Flask REST API
+- 🖥️ Streamlit Frontend
+- 📊 Feature Engineering
+- 🔍 Hyperparameter Tuning
+- 🚀 End-to-End Deployment Ready Architecture
 
-```text
-[ Streamlit UI Frontend ] (Port 8501)
-         │
-         ▼ (Encapsulated JSON Payload via HTTP POST)
- [ Flask API Backend ]    (Port 5000)
-         │
-         ▼ (Processes via Pipeline Engine)
-[ Logistic Regression Pipeline (.pkl) ]
+---
 
+# 🚀 Key Features
+
+- Predicts loan default risk in real time.
+- User-friendly Streamlit web interface.
+- Flask API for model inference.
+- Automated preprocessing pipeline.
+- Custom feature engineering.
+- Hyperparameter tuning using `RandomizedSearchCV`.
+- Handles categorical and numerical features seamlessly.
+- Deployable as a standalone web application.
+
+---
+
+# 🤖 Machine Learning Pipeline
+
+## Data Preprocessing
+
+- Missing value handling
+- Categorical encoding
+- Numerical scaling
+- Column transformations using Scikit-Learn pipelines
+
+## Feature Engineering
+
+The following custom features were created:
+
+- ✅ `Income_Loan_Ratio`
+- ✅ `Employment_Stability`
+- ✅ `High_DTI_Flag`
+- ✅ `credit_score_category`
+- ✅ `log_income`
+- ✅ `log_loan_amount`
+
+These engineered features improved the predictive capability of the final model.
+
+---
+
+# 📈 Model Selection
+
+Three machine learning models were evaluated:
+
+| Model | ROC-AUC |
+|--------|---------|
+| Logistic Regression | **0.7539** ✅ |
+| XGBoost | 0.7441 |
+| Random Forest | 0.7311 |
+
+After comparison, **Logistic Regression** was selected as the production model because it achieved the highest ROC-AUC score and provided strong, interpretable performance.
+
+---
+
+# 📊 Final Model Performance
+
+## Logistic Regression (Hyperparameter Tuned)
+
+| Metric | Score |
+|----------|--------|
+| ROC-AUC Score | **0.7539** |
+| Accuracy | **68.62%** |
+| Precision (Default Class) | **0.22** |
+| Recall (Default Class) | **0.69** |
+| F1-Score (Default Class) | **0.34** |
+
+The model successfully identifies a significant proportion of risky loan applicants while maintaining competitive overall performance.
+
+---
+
+# 🛠️ Hyperparameter Tuning
+
+Randomized Search Cross Validation was used to optimize the Logistic Regression model.
+
+Best Parameters:
+
+```python
+{
+    "C": 0.017638,
+    "penalty": "l1",
+    "solver": "saga",
+    "max_iter": 1000
+}
 ```
 
+Cross Validation:
 
-## 📂 Project Structure
+- 3-Fold Cross Validation
+- 50 Random Parameter Combinations
+- Optimization Metric: **ROC-AUC**
 
+---
+
+# 🏗️ System Architecture
+
+```
+                ┌──────────────────────┐
+                │   Streamlit Frontend │
+                │      (Port 8501)     │
+                └──────────┬───────────┘
+                           │
+                    HTTP POST Request
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │      Flask API       │
+                │      (Port 5000)     │
+                └──────────┬───────────┘
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │  ML Prediction Model │
+                │ Logistic Regression  │
+                └──────────┬───────────┘
+                           │
+                           ▼
+                Loan Risk Prediction
+```
+
+---
+
+# 📂 Project Structure
+
+```text
 Loan-Eligibility-Prediction/
+│
 ├── app/
-│   ├── api.py                   # ⚙️ Flask Backend (Listens for JSON payloads)
-│   ├── app.py                   # 🖥️ Streamlit Master Navigation Router
-│   ├── main_ui.py               # 📊 Core application layout & forms
-│   ├── tech_stack.py            # 🛠️ System architecture documentation
-│   └── about.py                 # 👤 Developer contact page
+│   ├── api.py
+│   ├── app.py
+│   ├── main_ui.py
+│   ├── tech_stack.py
+│   └── about.py
+│
 ├── src/
-│   ├── __init__.py              
-│   ├── data_preprocessing.py    # Sklearn column transformers
-│   ├── Feature_Engineering.py   # Custom ratio & flag generation
-│   ├── train_model.py           # Factory script for hyperparameter tuning
-│   └── loan_production_pipeline.pkl  # 🧠 Final trained Logistic Regression model
-├── run.py                       # 🚀 Master startup script (Launches both servers)
-├── requirements.txt             # Python dependencies
-└── .gitignore                   # Keeps repository clean of data blobs
+│   ├── train_model.py
+│   ├── data_preprocessing.py
+│   ├── feature_engineering.py
+│   ├── loan_production_pipeline.pkl
+│   └── __init__.py
+│
+├── data/
+│   └── cleaned_data.csv
+│
+├── run.py
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
 
+---
 
+# 💻 Technologies Used
 
-## 💻 How to Run locally
+### Programming Language
 
-    1.Clone the Repository:
-        git clone [https://github.com/your-username/A-Loan-Eligibility-Prediction-app.git](https://github.com/your-username/A-Loan-Eligibility-Prediction-app.git)
-        cd A-Loan-Eligibility-Prediction-app
-    
-    2. Install dependencies
-        pip install -r requirements.txt
+- Python
 
-    3. Launch the Microservices
-        python run.py
+### Machine Learning
 
-    The web dashboard will automatically open in your default browser at http://localhost:8501.
+- Scikit-Learn
+- Logistic Regression
+- RandomizedSearchCV
+
+### Data Processing
+
+- Pandas
+- NumPy
+
+### Backend
+
+- Flask
+
+### Frontend
+
+- Streamlit
+
+### Model Persistence
+
+- Joblib
+
+### Visualization
+
+- Matplotlib (optional)
+
+---
+
+# ⚡ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/Loan-Eligibility-Prediction.git
+
+cd Loan-Eligibility-Prediction
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# ▶️ Running the Project
+
+## Step 1: Train the model (if needed)
+
+```bash
+python src/train_model.py
+```
+
+This generates:
+
+```
+loan_production_pipeline.pkl
+```
+
+## Step 2: Start the Flask backend
+
+```bash
+python app/api.py
+```
+
+## Step 3: Launch the Streamlit frontend
+
+```bash
+streamlit run app/app.py
+```
+
+Open your browser at:
+
+```
+http://localhost:8501
+```
+
+---
+
+# 📥 Example Input
+
+| Feature | Example |
+|----------|----------|
+| Age | 35 |
+| Income | 90000 |
+| LoanAmount | 15000 |
+| CreditScore | 780 |
+| NumCreditLines | 5 |
+| InterestRate | 7.5 |
+| LoanTerm | 36 |
+| DTIRatio | 0.25 |
+| EmploymentType | Full-time |
+| HasMortgage | Yes |
+| LoanPurpose | Home |
+| HasCoSigner | Yes |
+
+---
+
+# 🎯 Future Improvements
+
+- SHAP-based model explanations
+- Probability calibration
+- Threshold optimization for different lending policies
+- Cloud deployment (AWS, Azure, GCP)
+- Docker support
+- User authentication and loan history
+- Continuous model retraining pipeline
+
+---
+
+# 👨‍💻 Author
+
+**Kumar Shanu**
+
+Machine Learning • Python • Data Science • Full Stack Development
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.
