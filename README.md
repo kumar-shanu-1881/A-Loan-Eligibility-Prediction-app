@@ -269,7 +269,7 @@ python app/api.py
 ```bash
 streamlit run app/app.py
 ```
-## Step 3: To run both(Streamlit UI & Flask API) in one command locally
+## Step 4: To run both(Streamlit UI & Flask API) in one command locally
 
 ```bash
 python run.py
