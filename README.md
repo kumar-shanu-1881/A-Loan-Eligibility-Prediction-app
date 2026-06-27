@@ -6,6 +6,14 @@
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+## 🌐 Live Application
+
+The frontend user interface is fully deployed and accessible to the public. 
+
+* **Live Demo:** [Smart Loan Risk Evaluator](https://loan-ui-dfbh.onrender.com/)
+* **Hosting Platform:** Render (Free Tier)
+* **Status:** Active
+
 A machine learning–powered web application that predicts **loan eligibility and default risk** using customer financial and demographic information. The project follows a **microservices architecture**, where a **Streamlit frontend** communicates with a **Flask backend API** hosting a trained machine learning pipeline.
 
 ✔ Compared 3 machine learning models
