@@ -11,7 +11,11 @@ st.markdown("""
 
 
 # Page Configuration
-st.set_page_config(page_title="Loan Risk Portal", page_icon="🏦", layout="centered")
+st.set_page_config(
+    page_title="Loan Risk Portal",
+    page_icon="🏦",
+    layout="wide"
+)
 
 #Declare ofavailable web sub-pages
 predict_page = st.Page("main_ui.py", title="Risk Evaluator", icon="📊", default=True)
