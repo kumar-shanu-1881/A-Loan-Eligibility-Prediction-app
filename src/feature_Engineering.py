@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 # Load the raw data
-url=r"C:\Users\bnsah\OneDrive\文档\PROJECTS(FINAL)\PROJECTS\Loan Eligibility Prediction\data\cleaned_data.csv"
-df=pd.read_csv(url)
+# url=r"C:\Users\bnsah\OneDrive\文档\PROJECTS(FINAL)\PROJECTS\Loan Eligibility Prediction\data\cleaned_data.csv"
+# df=pd.read_csv(url)
 
 # print(df.head())
 # print(df.columns)
