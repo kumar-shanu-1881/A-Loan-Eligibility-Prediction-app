@@ -11,7 +11,7 @@ def main():
     flask_process = subprocess.Popen([sys.executable, "app/api.py"])
 
     # Give Flask 2 seconds to fully start up before launching the frontend
-    time.sleep(2)
+    time.sleep(15)
 
     render_port = os.getenv("PORT", "8501")
 

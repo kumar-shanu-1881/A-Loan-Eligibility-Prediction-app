@@ -64,6 +64,7 @@ if submit_button:
         try:
             # Send the data to your Flask API
             flask_url = "http://127.0.0.1:5000/predict"
+            # flask_url = "https://loan-api.onrender.com/predict"
             response = requests.post(flask_url, json=input_data)
             
             if response.status_code == 200:
