@@ -20,6 +20,7 @@ A machine learning–powered web application that predicts **loan eligibility an
 ✔ Applied feature engineering and hyperparameter tuning  
 ✔ Achieved ROC-AUC of 0.7539 with tuned Logistic Regression  
 ✔ Built a complete Flask + Streamlit web application for loan eligibility prediction  
+✔ Dual-Server Microservices: Decoupled presentation layer (Streamlit) and mathematical inference engine (Flask API).  
 ---
 
 # 📌 Project Overview
@@ -268,6 +269,11 @@ python app/api.py
 ```bash
 streamlit run app/app.py
 ```
+## Step 3: To run both(Streamlit UI & Flask API) in one command locally
+
+```bash
+python run.py
+```
 
 Open your browser at:
 
@@ -276,6 +282,11 @@ http://localhost:8501
 ```
 
 ---
+
+### Note: To run it locally 
+
+ensure in main_ui.py should have this url ->  # flask_url = "http://127.0.0.1:5000/predict" 
+
 
 # 📥 Example Input
 
