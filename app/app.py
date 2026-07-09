@@ -1,23 +1,9 @@
 import streamlit as st
-import requests
+from woke_url import wake_url
 
-#live Render backend URL
-BACKEND_URL = "https://loan-api-iuqc.onrender.com"
-
-# cached function that pings the backend once on startup
-@st.cache_resource(show_spinner=False)
-def wake_up_backend():
-    try:
-        # A quick GET request to the backend's root or health endpoint
-        # We set a short timeout so it doesn't freeze the frontend forever
-        response = requests.get(BACKEND_URL, timeout=5)
-        return True
-    except requests.exceptions.RequestException:
-        # If it times out or fails, it means the server is currently spinning up
-        return False
 
 #Trigger the wake-up call at the start of your UI code
-backend_is_awake = wake_up_backend()
+backend_is_awake = wake_url()
 
 #Optional: Show a friendly status indicator to the user
 if not backend_is_awake:
