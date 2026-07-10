@@ -1,4 +1,3 @@
-from API_wakeup import api_state
 import streamlit as st
     
 
@@ -36,12 +35,10 @@ st.sidebar.caption("v1.2.0 - Production Balanced Release")
 
 
 # Live status indicator in the sidebar
-status = st.sidebar.empty()
+status_placeholder = st.sidebar.empty()
+status_placeholder.info("🟡 Cloud API Sleeping")
 
-if api_state.awake:
-    status.success("🟢 Prediction API Online")
-else:
-    status.warning("🟡 Waking Prediction API...")
+
 
 #runs the selected page 
 pg.run()

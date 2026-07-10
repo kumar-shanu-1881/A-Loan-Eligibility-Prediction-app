@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
-from API_wakeup import ensure_api_awake
+from API_wakeup import wake_api
+from app import status_placeholder
 
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
@@ -43,9 +44,6 @@ with st.form("loan_application"):
 
 #Prediction Logic (Connects to Flask) 
 if submit_button:
-    if not ensure_api_awake():
-        st.error("Prediction service did not wake up in time. Please try again.")
-        st.stop()
     # Package the UI inputs into a dictionary
     input_data = {
         "Age": age,
@@ -64,9 +62,15 @@ if submit_button:
     }
     
     with st.spinner('Connecting to Flask Backend for Analysis...'):
+        if not wake_api():
+            status_placeholder.error("🔴 Cloud API Offline")
+            st.error("❌ Prediction service could not be started.")
+            st.stop()
+        status_placeholder.success("🟢 Cloud API Connected")
         try:
             # Send the data to your Flask API
             # flask_url = "http://127.0.0.1:5000/predict"
+            
             flask_url = "https://loan-api-iuqc.onrender.com/predict"
             response = requests.post(flask_url, json=input_data,timeout=30)
             

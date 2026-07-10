@@ -1,13 +1,13 @@
 import time
 import requests
 
+API_URL = "https://loan-api-iuqc.onrender.com"
+
+MAX_WAIT = 120      # seconds
+RETRY_EVERY = 3     # seconds
 
 def wake_api():
     print("🚀 Trying to wake the Render service...\n")
-    API_URL = "https://loan-api-iuqc.onrender.com"
-
-    MAX_WAIT = 120      # seconds
-    RETRY_EVERY = 3     # seconds
 
     start = time.time()
 
