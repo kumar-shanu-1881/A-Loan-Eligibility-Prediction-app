@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-
+from API_wakeup import ensure_api_awake, API_URL
 
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
@@ -40,6 +40,10 @@ with st.form("loan_application"):
 
     # The button is created here!
     submit_button = st.form_submit_button(label="Analyze Application")
+    if st.button("Analyze"):
+        if not ensure_api_awake():
+            st.error("Prediction service did not wake up in time. Please try again.")
+            st.stop()
 
 #Prediction Logic (Connects to Flask) 
 if submit_button:
@@ -65,7 +69,7 @@ if submit_button:
             # Send the data to your Flask API
             # flask_url = "http://127.0.0.1:5000/predict"
             flask_url = "https://loan-api-iuqc.onrender.com/predict"
-            response = requests.post(flask_url, json=input_data)
+            response = requests.post(flask_url, json=input_data,timeout=30)
             
             if response.status_code == 200:
                 result = response.json()
@@ -89,3 +93,7 @@ if submit_button:
                 
         except requests.exceptions.ConnectionError:
             st.error("🚨 Could not connect to the backend! Make sure your Flask API is running in another terminal window.")
+        except requests.exceptions.JSONDecodeError:
+            st.error("Unexpected response from server. Please retry.")
+        except requests.exceptions.RequestException as e:
+            st.error(f"Request failed: {e}")

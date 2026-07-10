@@ -1,15 +1,5 @@
 import streamlit as st
-from woke_url import wake_url
-
-
-#Trigger the wake-up call at the start of your UI code
-backend_is_awake = wake_url()
-
-#Optional: Show a friendly status indicator to the user
-if not backend_is_awake:
-    st.info("⏳ Connecting to the cloud inference engine... If this is the first load, the backend may take 30-40 seconds to wake up from sleep mode.")
-else:
-    st.sidebar.success("● Cloud API Connected")
+from API_wakeup import api_state
     
 
 # Page Configuration
@@ -44,5 +34,10 @@ pg = st.navigation({
 st.sidebar.markdown("### 🏦 Axis Analytics")
 st.sidebar.caption("v1.2.0 - Production Balanced Release")
 
-# Execute the active page
-pg.run()
+
+# Live status indicator in the sidebar
+status_placeholder = st.sidebar.empty()
+if api_state.awake:
+    status_placeholder.success("● Cloud API Connected")
+else:
+    status_placeholder.info("⏳ Waking up cloud inference engine...")
