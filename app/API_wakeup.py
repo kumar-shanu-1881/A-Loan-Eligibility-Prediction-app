@@ -11,39 +11,60 @@ class ApiWakeState:
         self.awake = False
 
 
-def wake_url(state, url=API_URL, max_wait=120, retry_every=3):
-    """Runs in a background thread. Keeps retrying until the API responds."""
-    start = time.time()
-    while time.time() - start < max_wait:
+def wake_url(state):
+    """
+    Keep pinging the API until it wakes up.
+    Runs in a background thread.
+    """
+
+    while True:
         try:
-            resp = requests.get(url, timeout=10)
-            if resp.status_code < 500:
+            response = requests.get(API_URL, timeout=30)
+
+            if response.status_code == 200:
                 state.awake = True
                 return
+
         except requests.exceptions.RequestException:
             pass
-        time.sleep(retry_every)
+
+        time.sleep(5)
 
 
 @st.cache_resource
 def start_api_wakeup():
-    """Runs once per container. Starts the wake-up thread and returns instantly."""
     state = ApiWakeState()
-    threading.Thread(target=wake_url, args=(state,), daemon=True).start()
+
+    threading.Thread(
+        target=wake_url,
+        args=(state,),
+        daemon=True
+    ).start()
+
     return state
 
 
 api_state = start_api_wakeup()
 
 
-def ensure_api_awake(max_wait=60):
-    """Call before sending the real /predict request."""
+def ensure_api_awake(timeout=90):
+    """
+    Wait until API becomes available.
+    Returns True if awake, False otherwise.
+    """
+
     if api_state.awake:
         return True
+
     start = time.time()
-    with st.spinner("Waking up prediction service...\n please wait it takes 20-30s "):
-        while time.time() - start < max_wait:
+
+    with st.spinner("☁️ Waking cloud prediction service...\nPlease wait 20-60 seconds..."):
+
+        while time.time() - start < timeout:
+
             if api_state.awake:
                 return True
+
             time.sleep(1)
+
     return False
