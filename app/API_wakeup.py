@@ -41,7 +41,7 @@ def ensure_api_awake(max_wait=60):
     if api_state.awake:
         return True
     start = time.time()
-    with st.spinner("Waking up prediction service..."):
+    with st.spinner("Waking up prediction service...\n please wait it takes 20-30s "):
         while time.time() - start < max_wait:
             if api_state.awake:
                 return True
