@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from API_wakeup import ensure_api_awake, API_URL
+from API_wakeup import ensure_api_awake
 
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
@@ -40,10 +40,10 @@ with st.form("loan_application"):
 
     # The button is created here!
     submit_button = st.form_submit_button(label="Analyze Application")
-    if st.button("Analyze"):
-        if not ensure_api_awake():
-            st.error("Prediction service did not wake up in time. Please try again.")
-            st.stop()
+if submit_button:
+    if not ensure_api_awake():
+        st.error("Prediction service did not wake up in time. Please try again.")
+        st.stop()
 
 #Prediction Logic (Connects to Flask) 
 if submit_button:
