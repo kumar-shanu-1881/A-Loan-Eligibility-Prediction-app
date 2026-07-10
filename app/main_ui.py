@@ -40,13 +40,12 @@ with st.form("loan_application"):
 
     # The button is created here!
     submit_button = st.form_submit_button(label="Analyze Application")
+
+#Prediction Logic (Connects to Flask) 
 if submit_button:
     if not ensure_api_awake():
         st.error("Prediction service did not wake up in time. Please try again.")
         st.stop()
-
-#Prediction Logic (Connects to Flask) 
-if submit_button:
     # Package the UI inputs into a dictionary
     input_data = {
         "Age": age,

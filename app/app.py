@@ -41,3 +41,6 @@ if api_state.awake:
     status_placeholder.success("● Cloud API Connected")
 else:
     status_placeholder.info("⏳ Waking up cloud inference engine...")
+
+#runs the selected page 
+pg.run()
