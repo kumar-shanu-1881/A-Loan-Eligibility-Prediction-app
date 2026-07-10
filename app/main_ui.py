@@ -63,7 +63,6 @@ if submit_button:
     
     with st.spinner('Connecting to Flask Backend for Analysis...'):
         if not wake_api():
-            status_placeholder.error("🔴 Cloud API Offline")
             st.error("❌ Prediction service could not be started.")
             st.stop()
         status_placeholder.success("🟢 Cloud API Connected")
