@@ -3,6 +3,8 @@ import requests
 from API_wakeup import wake_api
 from app import status_placeholder
 
+status_placeholder = st.sidebar.empty()
+status_placeholder.info("🟡 Cloud API Sleeping")
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
 st.markdown("---")
@@ -63,6 +65,7 @@ if submit_button:
     
     with st.spinner('Connecting to Flask Backend for Analysis...'):
         if not wake_api():
+            status_placeholder.error("🔴 Cloud API Offline")
             st.error("❌ Prediction service could not be started.")
             st.stop()
         status_placeholder.success("🟢 Cloud API Connected")

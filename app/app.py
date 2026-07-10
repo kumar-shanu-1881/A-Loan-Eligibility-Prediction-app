@@ -33,12 +33,5 @@ pg = st.navigation({
 st.sidebar.markdown("### 🏦 Axis Analytics")
 st.sidebar.caption("v1.2.0 - Production Balanced Release")
 
-
-# Live status indicator in the sidebar
-status_placeholder = st.sidebar.empty()
-status_placeholder.info("🟡 Cloud API Sleeping")
-
-
-
 #runs the selected page 
 pg.run()
