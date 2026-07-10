@@ -1,13 +1,13 @@
 import streamlit as st
 import requests
 from API_wakeup import wake_api
-from app import status_placeholder
 
-status_placeholder = st.sidebar.empty()
-status_placeholder.info("🟡 Cloud API Sleeping")
+
 st.title("🏦 Smart Loan Risk Evaluator")
 st.markdown("Enter the applicant's financial details below to compute real-time default probability.")
 st.markdown("---")
+status_placeholder = st.sidebar.empty()
+status_placeholder.info("🟡 Cloud API Sleeping")
 
 # User Input UI (This is where submit_button is defined!) 
 with st.form("loan_application"):

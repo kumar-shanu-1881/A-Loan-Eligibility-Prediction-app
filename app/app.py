@@ -32,6 +32,5 @@ pg = st.navigation({
 # Inject structural sidebar branding
 st.sidebar.markdown("### 🏦 Axis Analytics")
 st.sidebar.caption("v1.2.0 - Production Balanced Release")
-
 #runs the selected page 
 pg.run()
