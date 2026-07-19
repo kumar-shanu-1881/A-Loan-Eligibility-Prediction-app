@@ -2,7 +2,7 @@ name: Keep Project Awake
 
 on:
   schedule:
-    # This runs every 10 minutes
+    # This runs every 15 minutes
     - cron: '*/15 * * * *'
   workflow_dispatch: # Allows you to run it manually to test
 
