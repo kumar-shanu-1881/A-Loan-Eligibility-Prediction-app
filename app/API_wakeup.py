@@ -6,8 +6,8 @@ def wake_api():
     print("🚀 Trying to wake the Render service...\n")
     API_URL = "https://loan-api-iuqc.onrender.com"
 
-    MAX_WAIT = 120      # seconds
-    RETRY_EVERY = 3     # seconds
+    MAX_WAIT = 180      # seconds
+    RETRY_EVERY = 5     # seconds
 
     start = time.time()
 
@@ -15,7 +15,7 @@ def wake_api():
 
         try:
             print("📡 Sending request...")
-            response = requests.get(API_URL, timeout=30)
+            response = requests.get(API_URL, timeout=60)
 
             print(f"Status Code: {response.status_code}")
 

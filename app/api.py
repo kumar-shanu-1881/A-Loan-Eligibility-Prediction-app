@@ -15,6 +15,12 @@ app = Flask(__name__)
 model_path = os.path.join(os.path.dirname(__file__), '..', 'src', 'loan_production_pipeline.pkl')
 pipeline = joblib.load(model_path)
 
+# health-check endpoint
+@app.route('/health', methods=['GET'])
+def health():
+    # Return 200 OK immediately.
+    return jsonify({"status": "alive"}), 200
+
 @app.route('/')
 def home():
     return "🏦 Loan Eligibility API is actively running!"

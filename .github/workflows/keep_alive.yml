@@ -1,0 +1,17 @@
+name: Keep Render API Awake
+
+on:
+  schedule:
+    # This runs every 10 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch: # Allows you to run it manually to test
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the API
+        run: |
+          # Replace this URL with your Render API URL
+          curl -I https://loan-api-iuqc.onrender.com/health
+          curl -I https://loan-ui-dfbh.onrender.com
