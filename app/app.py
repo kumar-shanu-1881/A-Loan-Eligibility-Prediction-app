@@ -1,13 +1,11 @@
 import streamlit as st
     
-
 # Page Configuration
 st.set_page_config(
     page_title="Loan Risk Portal",
     page_icon="🏦",
     layout="wide"
 )
-
 
 st.markdown("""
     <style>
