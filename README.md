@@ -6,13 +6,22 @@
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## 🌐 Live Application
+## 🌍 Live Demo
 
-The frontend user interface is fully deployed and accessible to the public. 
+### Frontend (Streamlit UI)
+https://loan-ui-dfbh.onrender.com
 
-* **Live Demo:** [Smart Loan Risk Evaluator](https://loan-ui-dfbh.onrender.com/)
-* **Hosting Platform:** Render (Free Tier)
-* **Status:** Active
+### Backend (Flask API)
+https://loan-api-iuqc.onrender.com
+
+> > **Note:** This project uses Render's free hosting. If predictions don't work immediately, please visit the backend once to wake it:
+>
+> Backend: https://loan-api-iuqc.onrender.com
+>
+> Wait until you see **"🏦 Loan Eligibility API is actively running!"**, then open:
+>
+> Frontend: https://loan-ui-dfbh.onrender.com
+
 
 A machine learning–powered web application that predicts **loan eligibility and default risk** using customer financial and demographic information. The project follows a **microservices architecture**, where a **Streamlit frontend** communicates with a **Flask backend API** hosting a trained machine learning pipeline.
 
