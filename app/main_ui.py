@@ -62,6 +62,7 @@ if submit_button:
         "LoanPurpose": loan_purpose,
         "HasCoSigner": has_cosigner
     }
+    print(input_data)
     
     with st.spinner('Connecting to Flask Backend for Analysis...'):
         if not wake_api():
@@ -80,6 +81,7 @@ if submit_button:
                 result = response.json()
                 prediction = result['prediction']
                 probability = result['probability']
+                print("Prediction:- ",prediction,"\n" ,"Probability:- ",probability)
                 
                 # Display Results 
                 st.markdown("---")
