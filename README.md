@@ -37,6 +37,22 @@ The application combines:
 - 🚀 End-to-End Deployment Ready Architecture
 
 ---
+## Application Preview
+
+### Home Page
+
+![Home Page](images/Home_page.png)
+---
+
+### TechStack & System Architecture
+
+![Tech Stack](images/TechStack_&_System.png)
+---
+
+### About Page
+
+![About Page](images/About_page.png)
+---
 
 # 🚀 Key Features
 
@@ -64,12 +80,12 @@ The application combines:
 
 The following custom features were created:
 
-- ✅ `Income_Loan_Ratio`
-- ✅ `Employment_Stability`
-- ✅ `High_DTI_Flag`
-- ✅ `credit_score_category`
-- ✅ `log_income`
-- ✅ `log_loan_amount`
+- ✅ `Income_Loan_Ratio`– Measures repayment capacity.
+- ✅ `Employment_Stability`– Years of employment.
+- ✅ `High_DTI_Flag`– Flags financially stressed applicants.
+- ✅ `credit_score_category`– Converts raw credit scores into risk categories.
+- ✅ `log_income`– Reduces skewness.
+- ✅ `log_loan_amount`-Normalizes loan distribution.
 
 These engineered features improved the predictive capability of the final model.
 
@@ -84,11 +100,19 @@ Although Random Forest achieved higher overall accuracy (87%), it struggled to i
 After comparing ROC-AUC, recall, and overall performance, Logistic Regression was selected as the final production model because it achieved the highest ROC-AUC (0.7539) and detected approximately 69% of default cases, making it more suitable for credit risk assessment.
 
 
-| Model | ROC-AUC |
-|--------|---------|
-| Logistic Regression | **0.7539** ✅ |
-| XGBoost | 0.7441 |
-| Random Forest | 0.7311 |
+| Model               | ROC-AUC    |
+| ------------------- | ---------- |
+| Logistic Regression | **0.7539** ✅|
+| XGBoost             | 0.7441     |
+| Random Forest       | 0.7311     |
+
+Three machine learning algorithms were evaluated: Logistic Regression, Random Forest, and XGBoost.
+
+XGBoost achieved the highest ROC-AUC (0.7883), indicating the strongest ranking performance.
+Random Forest achieved the highest overall accuracy (85.96%) but showed lower recall for the default class.
+Logistic Regression provided the best balance between interpretability and recall, making it a practical baseline for credit-risk prediction.
+
+Depending on business objectives, different models may be preferred. The project includes implementations and evaluation of all three models.
 
 After comparison, **Logistic Regression** was selected as the production model because it achieved the highest ROC-AUC score and provided strong, interpretable performance.
 
@@ -100,11 +124,11 @@ After comparison, **Logistic Regression** was selected as the production model b
 
 | Metric | Score |
 |----------|--------|
-| ROC-AUC Score | **0.7539** |
-| Accuracy | **68.62%** |
-| Precision (Default Class) | **0.22** |
-| Recall (Default Class) | **0.69** |
-| F1-Score (Default Class) | **0.34** |
+| ROC-AUC Score | **0.7837** |
+| Accuracy | **73.38%** |
+| Precision (Default Class) | **0.31** |
+| Recall (Default Class) | **0.68** |
+| F1-Score (Default Class) | **0.42** |
 
 The model successfully identifies a significant proportion of risky loan applicants while maintaining competitive overall performance.
 
@@ -159,7 +183,31 @@ Cross Validation:
                 Loan Risk Prediction
 ```
 
+# 🚀 Deployment
+
+The application follows a two-service deployment architecture:
+
+### Frontend
+- **Framework:** Streamlit
+- **Hosting Platform:** Render
+- **Purpose:** Provides the interactive user interface for collecting applicant information and displaying prediction results.
+
+### Backend
+- **Framework:** Flask REST API
+- **Hosting Platform:** Render
+- **Purpose:** Hosts the trained machine learning pipeline and performs loan risk inference.
+
+### Communication
+The frontend sends applicant information to the backend using **HTTP POST** requests. The Flask API processes the request, performs feature engineering and preprocessing through the trained pipeline, and returns both the predicted class and the probability score in JSON format.
+
 ---
+
+## Current Limitations
+
+- Render Free Tier causes cold-start delays 30-60 sec.
+- Model trained on publicly available data.
+- Predictions are for educational purposes only.
+
 
 # 📂 Project Structure
 
@@ -225,6 +273,33 @@ Loan-Eligibility-Prediction/
 - Matplotlib (optional)
 
 ---
+
+## REST API
+
+GET /
+
+Returns API status.
+
+GET /health
+
+Health check endpoint.
+
+POST /predict
+
+Predicts loan default probability.
+
+Request:
+
+{
+    ...
+}
+
+Response:
+
+{
+    "prediction":0,
+    "probability":0.28
+}
 
 # ⚡ Installation
 
@@ -306,6 +381,15 @@ ensure in main_ui.py should have this url ->  # flask_url = "http://127.0.0.1:50
 | HasCoSigner | Yes |
 
 ---
+
+# Dataset
+
+- Source: Kaggle Loan Default Dataset
+- Records: 255,347
+- Target Variable: Default
+- Numerical Features: Age, Income, LoanAmount, CreditScore, etc.
+- Categorical Features: EmploymentType, LoanPurpose, Mortgage Status, Co-Signer
+
 
 # 🎯 Future Improvements
 

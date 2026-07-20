@@ -8,7 +8,7 @@ from flask import Flask, request, jsonify
 #adding the src to python's path that can we import it 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.feature_Engineering import featureEng
-from src.data_preprocessing import preprocessing
+
 
 app = Flask(__name__)
 
@@ -37,7 +37,6 @@ def predict():
 
         #pass df to feature eng
         input_df=featureEng(input_df)
-        input_df=preprocessing(input_df)
 
         #Pass it through the Logistic Regression pipeline
         prediction = pipeline.predict(input_df)[0]
