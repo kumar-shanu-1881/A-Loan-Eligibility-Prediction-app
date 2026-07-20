@@ -63,6 +63,12 @@ The application combines:
 ![About Page](images/About_page.png)
 ---
 
+# 🎥 Application Demo
+
+![Gif Demo](images/demo.gif)
+
+---
+
 # 🚀 Key Features
 
 - Predicts loan default risk in real time.
