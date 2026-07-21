@@ -8,7 +8,8 @@ import numpy as np
 # print(df.head())
 # print(df.columns)
 def featureEng(df):
-    df['Income_Loan_Ratio'] = df['Income'] / df['LoanAmount']
+    df['Income_Loan_Ratio'] = df['Income'] / df['LoanAmount'].replace(0, np.nan)
+    df['Income_Loan_Ratio'] = df['Income_Loan_Ratio'].fillna(0)  # or a sensible default
     df["Employment_Stability"] = df["MonthsEmployed"] / 12
     df["High_DTI_Flag"] = (df["DTIRatio"] > 0.4).astype(int)
     def credit_bucket(score):
