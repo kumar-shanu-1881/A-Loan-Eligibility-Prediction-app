@@ -67,7 +67,7 @@ if submit_button:
     with st.spinner('Connecting to Flask Backend for Analysis...'):
         if not wake_api():
             status_placeholder.error("🔴 Cloud API Offline")
-            st.error("❌ Prediction service could not be started.")
+            st.error("❌ Prediction service could not be started.\nPlease Click this link 'https://loan-api-iuqc.onrender.com' to wake backend api ")
             st.stop()
         status_placeholder.success("🟢 Cloud API Connected")
         try:
